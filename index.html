@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#100d12" />
+  <title>BIZARRO FIGHTERS — El combate continúa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="app">
+    <canvas id="gameCanvas" aria-label="Bizarro Fighters, arena de combate"></canvas>
+    <div class="grain"></div>
+    <header class="topbar" id="topbar">
+      <button class="brand" data-view="home" aria-label="Inicio"><span class="brand-mark">B</span><span>BIZARRO <b>FIGHTERS</b><small>CLUB DE COMBATE · Nº 09</small></span></button>
+      <div class="top-meta"><span class="online"><i></i> SISTEMA ACTIVO</span><span class="coin-pill"><span>◈</span><b id="coinCount">240</b></span><button class="icon-btn" id="soundBtn" aria-label="Sonido">♫</button></div>
+    </header>
+    <section class="screen home-screen" id="homeScreen">
+      <div class="home-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> TEMPORADA 01 &nbsp;·&nbsp; EL OTRO LADO</p>
+        <h1>LA BELLEZA<br>DE <em>LO ROTO.</em></h1>
+        <p class="intro">Quince anomalías. Cinco escenarios. Ninguna salida fácil.<br>Entra al ring y deja que el mundo se deforme.</p>
+        <button class="primary-btn" id="playBtn"><span>ENTRAR AL COMBATE</span><b>↗</b></button>
+        <div class="home-note"><span class="note-dot"></span> COMBATE 2D · 1 CONTRA 1 · SIN RELOJ</div>
+      </div>
+      <div class="feature-card"><div class="card-top"><span>ARCHIVO DE ANOMALÍAS</span><span>01 — 15</span></div><div class="hero-portrait" id="heroPortrait"></div><div class="feature-caption"><div><small>LUCHADOR DESTACADO</small><h2 id="heroName">EL SANTO HUECO</h2></div><span class="tier-tag">RANGO<br><b>???</b></span></div><div class="card-foot"><span>«NO HAY NADA DETRÁS DE LA MÁSCARA.»</span><span>↗</span></div></div>
+      <div class="home-bottom"><span>SCROLL PARA EXPLORAR <b>↓</b></span><span>HECHO PARA LOS QUE NO ENCAJAN</span></div>
+    </section>
+    <nav class="dock" id="dock">
+      <button class="dock-item active" data-view="home"><span>⌂</span>INICIO</button>
+      <button class="dock-item" data-view="fighters"><span>♟</span>LUCHADORES</button>
+      <button class="dock-item" data-view="customize"><span>✳</span>ESTILO</button>
+      <button class="dock-item" data-view="training"><span>⌁</span>ENTRENAR</button>
+      <button class="dock-item" data-view="store"><span>◇</span>TIENDA</button>
+      <button class="dock-item" data-view="missions"><span>▤</span>MISIONES</button>
+      <button class="dock-item" data-view="online"><span>◎</span>ONLINE</button>
+    </nav>
+    <section class="screen content-screen hidden" id="contentScreen">
+      <div class="section-heading"><div><p class="eyebrow" id="sectionEyebrow">ARCHIVO / 01</p><h1 id="sectionTitle">LUCHADORES</h1></div><button class="back-btn" id="backBtn">← VOLVER</button></div>
+      <div id="contentBody"></div>
+    </section>
+    <section class="screen select-screen hidden" id="selectScreen">
+      <div class="select-heading"><div><p class="eyebrow">ANTES DEL IMPACTO · <span id="selectStep">01 / 02</span></p><h1>ELIGE TU <em>ANOMALÍA.</em></h1></div><button class="back-btn" id="selectBack">← SALIR</button></div>
+      <div class="select-layout"><div class="fighter-grid" id="fighterGrid"></div><aside class="fighter-detail"><div class="detail-art" id="detailArt"></div><div class="detail-info"><p class="eyebrow" id="detailType">ANOMALÍA CLASE 01</p><h2 id="detailName">EL SANTO HUECO</h2><p id="detailBio">Una figura vacía que aprendió a golpear antes de aprender a existir.</p><div class="stats" id="detailStats"></div><div class="skill-list" id="detailSkills"></div><label class="arena-select">ESCENARIO<select id="arenaSelect"></select></label><button class="primary-btn confirm-btn" id="confirmBtn"><span>CONFIRMAR SELECCIÓN</span><b>↗</b></button></div></aside></div>
+    </section>
+    <section class="fight-screen hidden" id="fightScreen">
+      <div class="fight-top"><button class="back-btn" id="fightExit">Ⅱ PAUSA</button><div class="round-label">COMBATE SIN RELOJ <span>·</span> <b id="arenaLabel">CIRCO DE LAS CARAS</b></div><div class="round-label">RONDA <b id="roundCount">01</b></div></div>
+      <div class="fight-hud"><div class="fighter-hud left-hud"><div class="hud-name"><b id="playerHudName">EL SANTO HUECO</b><span>JUGADOR 1</span></div><div class="health-track"><i id="playerHealth"></i></div><div class="ult-track"><i id="playerUlt"></i></div></div><div class="vs">VS</div><div class="fighter-hud right-hud"><div class="hud-name"><span>CPU · RIVAL</span><b id="enemyHudName">LA NOVIA DE ALAMBRE</b></div><div class="health-track"><i id="enemyHealth"></i></div><div class="ult-track"><i id="enemyUlt"></i></div></div></div>
+      <div class="fight-message" id="fightMessage"></div>
+      <div class="touch-controls" id="touchControls"><div class="joystick" id="joystick"><div class="joy-ring"></div><div class="joy-knob" id="joyKnob"></div><span>MOVE</span></div><div class="action-controls"><button class="action-btn attack-btn" data-action="attack"><b>✕</b><small>GOLPE</small></button><button class="action-btn block-btn" data-action="block"><b>◒</b><small>BLOQUEO</small></button><button class="action-btn skill-btn skill-one" data-action="skill1"><b>01</b><small id="skillLabel1">S1</small><i></i></button><button class="action-btn skill-btn skill-two" data-action="skill2"><b>02</b><small id="skillLabel2">S2</small><i></i></button><button class="action-btn skill-btn skill-three" data-action="skill3"><b>03</b><small id="skillLabel3">S3</small><i></i></button><button class="action-btn ult-btn" data-action="ult"><b>ULT</b><small>DEFINITIVA</small><i></i></button></div></div>
+      <div class="fight-hint">WASD / FLECHAS · J GOLPE · K/L/; HABILIDADES · SHIFT BLOQUEO · ULT</div>
+      <div class="pause-panel hidden" id="pausePanel"><p class="eyebrow">RESPIRA. SI PUEDES.</p><h2>PAUSA</h2><button class="primary-btn" id="resumeBtn"><span>VOLVER AL RING</span><b>↗</b></button><button class="text-btn" id="quitFight">ABANDONAR COMBATE</button></div>
+      <div class="result-panel hidden" id="resultPanel"><p class="eyebrow">FIN DEL COMBATE</p><h2 id="resultTitle">VICTORIA.</h2><p id="resultCopy">Has sobrevivido a la anomalía.</p><div class="reward-line">RECOMPENSA <b>+<span id="rewardCoins">80</span> ◈</b></div><button class="primary-btn" id="rematchBtn"><span>REVANCHA</span><b>↻</b></button><button class="text-btn" id="resultHome">VOLVER AL LOBBY</button></div>
+    </section>
+    <div class="toast" id="toast"></div>
+    <footer class="site-footer"><span>BIZARRO FIGHTERS © 2025</span><span>NO ES UN LUGAR SEGURO.</span><span>V 0.9.4 // 2D</span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
